@@ -155,7 +155,7 @@ def main():
 			status = 0
 
 		if status == 0:
-			# Both coordinators are down!
+			# All the coordinators are down
 			if debug:
 				print("Coordinators are Down!")
 			# Set all child clusters to down state. 
