@@ -23,7 +23,7 @@ import jaydebeapi
 from prometheus_client import CollectorRegistry, Gauge, pushadd_to_gateway, instance_ip_grouping_key
 
 # Configuration
-debug = True
+debug = False
 api_timeout = 5
 jmxProtocol = "http://"
 sys.tracebacklimit = 0
@@ -119,10 +119,9 @@ def main():
 						if api_source_status_metric in record:
 							metric = dict(dict(record[1])['metrics'][0])
 							jobName = metric['labels']['job']
-							sourceName = metric['labels']['source']
 							sourceType = metric['labels']['type']
 							if jobName == dremioCluster:
-								push_source_status_metric(dremioCluster, sourceName, sourceType, 404)
+								push_source_status_metric(dremioCluster, sourceName, 400)
 				if sql_vds_count_value in item:
 					for record in item.items():
 						if sql_vds_count_value in record:
@@ -151,10 +150,17 @@ def main():
 					response = requests.request("GET", endpoint + catalog_url + container['id'], headers=headers, timeout=api_timeout, verify=verifySsl)
 					if debug:
 						print("\nContainer: ", response.json())
-					name = container['path'][0]
-					type = response.json()['type']
-					report_data_source_status (name, response.status_code)
-					push_source_status_metric(dremioCluster, name, type, response.status_code)
+
+					if response.status_code == 200:
+						name = container['path'][0]
+						type = response.json()['type']
+						report_data_source_status (name, response.status_code)
+						push_source_status_metric(dremioCluster, name, type, response.status_code)
+					else:
+						name = container['path'][0]
+						type = 'N/A'
+						report_data_source_status (name, response.status_code)
+						push_source_status_metric(dremioCluster, name, type, response.status_code)
 			
 			# SQL Metrics
 			# Connect to Dremio Node
@@ -176,7 +182,7 @@ def push_source_status_metric(dremioCluster, sourceName, sourceType, status):
 	metric = Gauge(api_source_status_metric, "Source status, pushed via Gateway", labelnames=['source', 'type'], registry=registry)
 	metric.labels(sourceName, sourceType).set_to_current_time()
 	metric.labels(sourceName, sourceType).set(status)
-	groupingKey = dict({"job": dremioCluster, "source": sourceName, "type": sourceType})
+	groupingKey = dict({"job": dremioCluster, "source": sourceName})
 	pushadd_to_gateway(pgwendpoint, job=dremioCluster, registry=registry, timeout=api_timeout, grouping_key=groupingKey)
 
 def push_sql_metric(metricName, dremioCluster, metricValue):
