@@ -59,7 +59,7 @@
   "gnetId": null,
   "graphTooltip": 2,
   "id": null,
-  "iteration": 1591519566022,
+  "iteration": 1591642525252,
   "links": [],
   "panels": [
     {
@@ -85,7 +85,7 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 6,
+        "w": 10,
         "x": 0,
         "y": 0
       },
@@ -180,8 +180,8 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 3,
-        "x": 6,
+        "w": 4,
+        "x": 10,
         "y": 0
       },
       "id": 4,
@@ -253,7 +253,7 @@
     },
     {
       "cacheTimeout": null,
-      "colorBackground": true,
+      "colorBackground": false,
       "colorPostfix": false,
       "colorPrefix": false,
       "colorValue": false,
@@ -276,7 +276,7 @@
       "gridPos": {
         "h": 4,
         "w": 3,
-        "x": 9,
+        "x": 14,
         "y": 0
       },
       "id": 23,
@@ -347,9 +347,9 @@
     },
     {
       "cacheTimeout": null,
-      "colorBackground": true,
+      "colorBackground": false,
       "colorPrefix": false,
-      "colorValue": false,
+      "colorValue": true,
       "colors": [
         "#37872D",
         "#FA6400",
@@ -368,8 +368,8 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 3,
-        "x": 12,
+        "w": 4,
+        "x": 17,
         "y": 0
       },
       "id": 11,
@@ -438,9 +438,9 @@
     },
     {
       "cacheTimeout": null,
-      "colorBackground": true,
+      "colorBackground": false,
       "colorPrefix": false,
-      "colorValue": false,
+      "colorValue": true,
       "colors": [
         "#37872D",
         "#FA6400",
@@ -460,7 +460,7 @@
       "gridPos": {
         "h": 4,
         "w": 3,
-        "x": 15,
+        "x": 21,
         "y": 0
       },
       "id": 21,
@@ -550,9 +550,464 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 3,
-        "x": 18,
-        "y": 0
+        "w": 4,
+        "x": 0,
+        "y": 4
+      },
+      "id": 10,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "$$hashKey": "object:386",
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "$$hashKey": "object:387",
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "pluginVersion": "6.7.0",
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "120%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false,
+        "ymax": null,
+        "ymin": null
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "sum(increase(metrics_jobs_active_15m_Value{job=~\"$Cluster\"}[$timeRange]))",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Total Jobs",
+      "type": "singlestat",
+      "valueFontSize": "100%",
+      "valueMaps": [
+        {
+          "$$hashKey": "object:389",
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorPrefix": false,
+      "colorValue": true,
+      "colors": [
+        "#73BF69",
+        "rgba(237, 129, 40, 0.89)",
+        "#B877D9"
+      ],
+      "datasource": "${DS_DREMIOPROMETHEUS}",
+      "decimals": 0,
+      "description": "",
+      "format": "short",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 4,
+        "y": 4
+      },
+      "id": 9,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "$$hashKey": "object:386",
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "$$hashKey": "object:387",
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "pluginVersion": "6.7.0",
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "120%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false,
+        "ymax": null,
+        "ymin": null
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "metrics_jobs_active_Value{job=~\"$Cluster\"}",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Active Jobs - Current",
+      "type": "singlestat",
+      "valueFontSize": "100%",
+      "valueMaps": [
+        {
+          "$$hashKey": "object:389",
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorPrefix": false,
+      "colorValue": true,
+      "colors": [
+        "#37872D",
+        "#FA6400",
+        "#C4162A"
+      ],
+      "datasource": "${DS_DREMIOPROMETHEUS}",
+      "decimals": 0,
+      "description": "",
+      "format": "short",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 8,
+        "y": 4
+      },
+      "id": 20,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "$$hashKey": "object:386",
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "$$hashKey": "object:387",
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "pluginVersion": "6.7.0",
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "120%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false,
+        "ymax": null,
+        "ymin": null
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "sum(increase(metrics_jobs_failed_15m_Value{job=~\"$Cluster\"}[$timeRange]))",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "thresholds": "1, 100",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Failed Jobs",
+      "type": "singlestat",
+      "valueFontSize": "100%",
+      "valueMaps": [
+        {
+          "$$hashKey": "object:389",
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorPrefix": false,
+      "colorValue": true,
+      "colors": [
+        "#37872D",
+        "rgba(237, 129, 40, 0.89)",
+        "#B877D9"
+      ],
+      "datasource": "${DS_DREMIOPROMETHEUS}",
+      "decimals": 0,
+      "description": "",
+      "format": "short",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 12,
+        "y": 4
+      },
+      "id": 35,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "$$hashKey": "object:386",
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "$$hashKey": "object:387",
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "pluginVersion": "6.7.0",
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "120%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false,
+        "ymax": null,
+        "ymin": null
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "count(dremio_api_source_status_Value{job=~\"$Cluster\"} == 200)",
+          "instant": true,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Good Data Source Count",
+      "type": "singlestat",
+      "valueFontSize": "100%",
+      "valueMaps": [
+        {
+          "$$hashKey": "object:389",
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorPrefix": false,
+      "colorValue": true,
+      "colors": [
+        "#C4162A",
+        "#FA6400",
+        "#73BF69"
+      ],
+      "datasource": "${DS_DREMIOPROMETHEUS}",
+      "decimals": 0,
+      "description": "",
+      "format": "short",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 16,
+        "y": 4
+      },
+      "id": 36,
+      "interval": null,
+      "links": [],
+      "mappingType": 2,
+      "mappingTypes": [
+        {
+          "$$hashKey": "object:386",
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "$$hashKey": "object:387",
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "pluginVersion": "6.7.0",
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "120%",
+      "rangeMaps": [
+        {
+          "$$hashKey": "object:204",
+          "from": "null",
+          "text": "0",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false,
+        "ymax": null,
+        "ymin": null
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "count(dremio_api_source_status_Value{job=~\"$Cluster\"} != 200)",
+          "instant": true,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "count_bad",
+          "refId": "A"
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Bad Data Source Count",
+      "type": "singlestat",
+      "valueFontSize": "100%",
+      "valueMaps": [],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorPrefix": false,
+      "colorValue": false,
+      "colors": [
+        "#73BF69",
+        "rgba(237, 129, 40, 0.89)",
+        "#B877D9"
+      ],
+      "datasource": "${DS_DREMIOPROMETHEUS}",
+      "decimals": 0,
+      "description": "",
+      "format": "short",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 20,
+        "y": 4
       },
       "id": 34,
       "interval": null,
@@ -626,99 +1081,6 @@
       "colorPrefix": false,
       "colorValue": true,
       "colors": [
-        "#73BF69",
-        "rgba(237, 129, 40, 0.89)",
-        "#B877D9"
-      ],
-      "datasource": "${DS_DREMIOPROMETHEUS}",
-      "decimals": 0,
-      "description": "",
-      "format": "short",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 3,
-        "x": 21,
-        "y": 0
-      },
-      "id": 35,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "$$hashKey": "object:386",
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "$$hashKey": "object:387",
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "pluginVersion": "6.7.0",
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "120%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false,
-        "ymax": null,
-        "ymin": null
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "expr": "count(dremio_api_source_status_Value{job=~\"$Cluster\"} == 200)",
-          "instant": true,
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "thresholds": "",
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Data Source Count",
-      "type": "singlestat",
-      "valueFontSize": "100%",
-      "valueMaps": [
-        {
-          "$$hashKey": "object:389",
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": false,
-      "colorPrefix": false,
-      "colorValue": true,
-      "colors": [
         "#37872D",
         "rgba(237, 129, 40, 0.89)",
         "#B877D9"
@@ -738,7 +1100,7 @@
         "h": 4,
         "w": 8,
         "x": 0,
-        "y": 4
+        "y": 8
       },
       "id": 6,
       "interval": null,
@@ -831,7 +1193,7 @@
         "h": 4,
         "w": 8,
         "x": 8,
-        "y": 4
+        "y": 8
       },
       "id": 12,
       "interval": null,
@@ -924,7 +1286,7 @@
         "h": 4,
         "w": 8,
         "x": 16,
-        "y": 4
+        "y": 8
       },
       "id": 7,
       "interval": null,
@@ -979,281 +1341,6 @@
       "timeFrom": null,
       "timeShift": null,
       "title": "Failed Reflection Count",
-      "type": "singlestat",
-      "valueFontSize": "100%",
-      "valueMaps": [
-        {
-          "$$hashKey": "object:389",
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": false,
-      "colorPrefix": false,
-      "colorValue": true,
-      "colors": [
-        "#73BF69",
-        "rgba(237, 129, 40, 0.89)",
-        "#B877D9"
-      ],
-      "datasource": "${DS_DREMIOPROMETHEUS}",
-      "decimals": 0,
-      "description": "",
-      "format": "short",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 8,
-        "x": 0,
-        "y": 8
-      },
-      "id": 10,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "$$hashKey": "object:386",
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "$$hashKey": "object:387",
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "pluginVersion": "6.7.0",
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "120%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false,
-        "ymax": null,
-        "ymin": null
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "expr": "sum(increase(metrics_jobs_active_15m_Value{job=~\"$Cluster\"}[$timeRange]))",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "thresholds": "",
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Total Jobs",
-      "type": "singlestat",
-      "valueFontSize": "100%",
-      "valueMaps": [
-        {
-          "$$hashKey": "object:389",
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": false,
-      "colorPrefix": false,
-      "colorValue": true,
-      "colors": [
-        "#73BF69",
-        "rgba(237, 129, 40, 0.89)",
-        "#B877D9"
-      ],
-      "datasource": "${DS_DREMIOPROMETHEUS}",
-      "decimals": 0,
-      "description": "",
-      "format": "short",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 8,
-        "x": 8,
-        "y": 8
-      },
-      "id": 9,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "$$hashKey": "object:386",
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "$$hashKey": "object:387",
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "pluginVersion": "6.7.0",
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "120%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false,
-        "ymax": null,
-        "ymin": null
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "expr": "metrics_jobs_active_Value{job=~\"$Cluster\"}",
-          "instant": true,
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "thresholds": "",
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Active Jobs - Current",
-      "type": "singlestat",
-      "valueFontSize": "100%",
-      "valueMaps": [
-        {
-          "$$hashKey": "object:389",
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": false,
-      "colorPrefix": false,
-      "colorValue": true,
-      "colors": [
-        "#37872D",
-        "#FA6400",
-        "#C4162A"
-      ],
-      "datasource": "${DS_DREMIOPROMETHEUS}",
-      "decimals": 0,
-      "description": "",
-      "format": "short",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 8,
-        "x": 16,
-        "y": 8
-      },
-      "id": 20,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "$$hashKey": "object:386",
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "$$hashKey": "object:387",
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "pluginVersion": "6.7.0",
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "120%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false,
-        "ymax": null,
-        "ymin": null
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "expr": "sum(increase(metrics_jobs_failed_15m_Value{job=~\"$Cluster\"}[$timeRange]))",
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "thresholds": "1, 100",
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Failed Jobs",
       "type": "singlestat",
       "valueFontSize": "100%",
       "valueMaps": [
@@ -2701,5 +2788,5 @@
   "variables": {
     "list": []
   },
-  "version": 3
+  "version": 16
 }

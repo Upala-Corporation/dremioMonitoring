@@ -47,7 +47,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1591519557804,
+  "iteration": 1591640417324,
   "links": [],
   "panels": [
     {
@@ -677,7 +677,7 @@
   "templating": {
     "list": [
       {
-        "allValue": null,
+        "allValue": "",
         "current": {},
         "datasource": "${DS_DREMIOPROMETHEUS}",
         "definition": "label_values(metrics_reflections_active_Value, job)",
@@ -692,7 +692,7 @@
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
-        "sort": 0,
+        "sort": 1,
         "tagValuesQuery": "",
         "tags": [],
         "tagsQuery": "",
@@ -726,5 +726,5 @@
   "variables": {
     "list": []
   },
-  "version": 5
+  "version": 7
 }
