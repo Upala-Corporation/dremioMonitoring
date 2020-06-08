@@ -47,13 +47,13 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1591640417324,
+  "iteration": 1591658513731,
   "links": [],
   "panels": [
     {
       "columns": [],
       "datasource": "${DS_DREMIOPROMETHEUS}",
-      "fontSize": "150%",
+      "fontSize": "100%",
       "gridPos": {
         "h": 9,
         "w": 12,
@@ -209,7 +209,7 @@
     {
       "columns": [],
       "datasource": "${DS_DREMIOPROMETHEUS}",
-      "fontSize": "150%",
+      "fontSize": "100%",
       "gridPos": {
         "h": 9,
         "w": 12,
@@ -362,7 +362,7 @@
     {
       "columns": [],
       "datasource": "${DS_DREMIOPROMETHEUS}",
-      "fontSize": "150%",
+      "fontSize": "100%",
       "gridPos": {
         "h": 7,
         "w": 24,
@@ -726,5 +726,5 @@
   "variables": {
     "list": []
   },
-  "version": 7
+  "version": 8
 }
