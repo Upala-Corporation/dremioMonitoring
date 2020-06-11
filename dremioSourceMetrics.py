@@ -1,4 +1,4 @@
-#!/usr/bin/env python3 
+#!/usr/bin/env python3
 #
 #
 # Name         : dremioMetrics.py
@@ -9,7 +9,7 @@
 # Notes        : Needs python client for Prometheus: Install client using "pip3 install prometheus_client"
 #                Uses Python JDBC Module: Install client using "pip3 install JayDeBeApi"
 # CHANGE LOG   :
-#  Version 1.1 : 
+#  Version 1.1 :
 #          Date: June 8, 2020
 #   Description: Added support for SSL. In addition, the script support clusters using HA and non-HA setup
 #
@@ -23,8 +23,8 @@ import jaydebeapi
 from prometheus_client import CollectorRegistry, Gauge, pushadd_to_gateway, instance_ip_grouping_key
 
 # Configuration
-debug = False
-api_timeout = 5
+debug = True
+api_timeout = 60
 jmxProtocol = "http://"
 sys.tracebacklimit = 0
 urllib3.disable_warnings(urllib3.exceptions.SecurityWarning)
@@ -51,7 +51,7 @@ def main():
 
 		# Parse options from the file
 		cluster = configParser(optionsFile, dremioCluster)
-		masterCoordinator = cluster['mastercoordinator']	
+		masterCoordinator = cluster['mastercoordinator']
 		port = cluster['port']
 		jmxPort = cluster['jmxport']
 		username = cluster['username']
@@ -64,7 +64,7 @@ def main():
 		if 'standbycoordinator' in cluster:
 			standbyCoordinator = cluster['standbycoordinator']
 			standbyEnabled = True
-		
+
 		# SSL settings are optional. For SSL enabled clusters, we need the certificate bundle file too
 		sslEnabled = False
 		if 'sslenabled' in cluster:
@@ -73,10 +73,10 @@ def main():
 			if 'sslcertlocation' in cluster:
 				verifySsl = cluster['sslcertlocation']
 			else:
-				raise RuntimeError("SSL Configuration missing: Please set sslcertlocation option")	
+				raise RuntimeError("SSL Configuration missing: Please set sslcertlocation option")
 		else:
 			protocol = 'http://'
-			verifySsl = False		
+			verifySsl = False
 
 		# Master URL to hit
 		masterUrl = protocol + masterCoordinator + ":" + str(port)
@@ -97,7 +97,7 @@ def main():
 					status = 0
 			else:
 				status = 0
-			
+
 		if debug:
 			print("activeCoordinator: ", activeCoordinator)
 			print("status: ", status)
@@ -151,21 +151,16 @@ def main():
 					if debug:
 						print("\nContainer: ", response.json())
 
-					if response.status_code == 200:
-						name = container['path'][0]
-						report_data_source_status (name, response.status_code)
-						push_source_status_metric(dremioCluster, name, response.status_code)
-					else:
-						name = container['path'][0]
-						report_data_source_status (name, response.status_code)
-						push_source_status_metric(dremioCluster, name, response.status_code)
-			
+					name = container['path'][0]
+					report_data_source_status (name, response.status_code)
+					push_source_status_metric(dremioCluster, name, response.status_code)
+
 			# SQL Metrics
 			# Connect to Dremio Node
 			jdbcUrl = "jdbc:dremio:direct=" + activeCoordinator + ":" + str(jdbcPort)
 			cnxn = jaydebeapi.connect("com.dremio.jdbc.Driver", jdbcUrl, [username, password], jdbcJar)
 			cursor = cnxn.cursor()
-			
+
 			# VDS Count
 			query = 'select count(*) from information_schema."TABLES" where table_type = \'VIEW\' and table_schema not like \'@%\''
 			cursor.execute(query)
@@ -173,7 +168,7 @@ def main():
 			for row in result:
 				vdsCount = row[0]
 				push_sql_metric(sql_vds_count_value, dremioCluster, vdsCount)
-			
+
 def push_source_status_metric(dremioCluster, sourceName, status):
 	# Push Coordinator Status
 	registry = CollectorRegistry()

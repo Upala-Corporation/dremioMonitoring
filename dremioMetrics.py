@@ -1,4 +1,4 @@
-#!/usr/bin/env python3 
+#!/usr/bin/env python3
 #
 #
 # Name         : dremioMetrics.py
@@ -10,7 +10,7 @@
 #                Uses JDBC driver : Visit https://docs.dremio.com/drivers/dremio-jdbc-driver.html for details
 #                Uses Python JDBC Module: Install client using "pip3 install JayDeBeApi"
 # CHANGE LOG   :
-#  Version 1.1 : 
+#  Version 1.1 :
 #          Date: June 8, 2020
 #   Description: Added support for SSL. In addition, the script support clusters using HA and non-HA setup
 #
@@ -27,7 +27,7 @@ from prometheus_client import CollectorRegistry, Gauge, pushadd_to_gateway, dele
 
 # Configuration
 debug = True
-api_timeout = 5
+api_timeout = 60
 jmxProtocol = "http://"
 sys.tracebacklimit = 0
 urllib3.disable_warnings(urllib3.exceptions.SecurityWarning)
@@ -55,7 +55,7 @@ cluster_url = '/apiv2/provision/clusters'
 pgw_api_url = '/api/v1/metrics'
 
 def main():
-	
+
 	if len(sys.argv) < 3:
 		print_usage()
 	else:
@@ -64,7 +64,7 @@ def main():
 
 		# Parse options from the file
 		cluster = configParser(optionsFile, dremioCluster)
-		masterCoordinator = cluster['mastercoordinator']	
+		masterCoordinator = cluster['mastercoordinator']
 		port = cluster['port']
 		jmxPort = cluster['jmxport']
 		username = cluster['username']
@@ -77,7 +77,7 @@ def main():
 		if 'standbycoordinator' in cluster:
 			standbyCoordinator = cluster['standbycoordinator']
 			standbyEnabled = True
-		
+
 		# SSL settings are optional. For SSL enabled clusters, we need the certificate bundle file too
 		sslEnabled = False
 		if 'sslenabled' in cluster:
@@ -86,10 +86,10 @@ def main():
 			if 'sslcertlocation' in cluster:
 				verifySsl = cluster['sslcertlocation']
 			else:
-				raise RuntimeError("SSL Configuration missing: Please set sslcertlocation option")	
+				raise RuntimeError("SSL Configuration missing: Please set sslcertlocation option")
 		else:
 			protocol = 'http://'
-			verifySsl = False		
+			verifySsl = False
 
 		# Master URLs to hit
 		masterUrl = protocol + masterCoordinator + ":" + str(port)
@@ -139,7 +139,7 @@ def main():
 					response = requests.get(standbyJmxUrl, timeout=api_timeout, verify=False)
 				except requests.ConnectionError:
 					standbyStatus = 0
-			
+
 			if debug:
 				print('standbyStatus: ', standbyStatus)
 
@@ -158,7 +158,7 @@ def main():
 			# All the coordinators are down
 			if debug:
 				print("Coordinators are Down!")
-			# Set all child clusters to down state. 
+			# Set all child clusters to down state.
 			# Get list of child clusters for this job from Push Gateway
 			endpoint = pgwendpoint + pgw_api_url
 			response = requests.get(endpoint)
@@ -191,7 +191,7 @@ def main():
 								push_sql_metric(sql_threads_waiting_value, dremioCluster, executorNode, 0)
 								push_sql_metric(sql_direct_max_value, dremioCluster, executorNode, 0)
 								push_sql_metric(sql_direct_current_value, dremioCluster, executorNode, 0)
-								
+
 		else:
 			# Check Child Clusters
 			endpoint = protocol + activeCoordinator + ":" + str(port)
@@ -218,7 +218,7 @@ def main():
 					runningCount = len(cluster['containers']['runningList'])
 					desiredExecutorCount = pendingCount + provisioningCount + runningCount - decommissioningCount
 					runningContainers = cluster['containers']['runningList']
-					if debug: 
+					if debug:
 						print("  Pending: ", pendingCount, "Provisioning: ", provisioningCount)
 						print("  Provisioned Executors: ", desiredExecutorCount, "Running: ", runningCount)
 					usedMemoryMB = 0
@@ -243,7 +243,7 @@ def main():
 					push_api_total_executor_metric(dremioCluster, clusterName, desiredExecutorCount)
 					push_api_current_executor_metric(dremioCluster, clusterName, runningCount)
 					push_api_cluster_memory_allocated_metric(dremioCluster, clusterName, yarnMemoryMB)
-					push_api_cluster_memory_used_metric(dremioCluster, clusterName, usedMemoryMB)	
+					push_api_cluster_memory_used_metric(dremioCluster, clusterName, usedMemoryMB)
 				else:
 					# Cluster is down!
 					if debug:
@@ -259,7 +259,7 @@ def main():
 			jdbcUrl = "jdbc:dremio:direct=" + activeCoordinator + ":" + str(jdbcPort)
 			cnxn = jaydebeapi.connect("com.dremio.jdbc.Driver", jdbcUrl, [username, password], jdbcJar)
 			cursor = cnxn.cursor()
-			
+
 			# Executor count
 			query = 'select hostname, count(*) from sys.nodes group by hostname'
 			cursor.execute(query)
@@ -290,7 +290,7 @@ def main():
 				heapCurrent = row[4]
 				push_sql_metric(sql_direct_max_value, dremioCluster, executorNode, directMax)
 				push_sql_metric(sql_direct_current_value, dremioCluster, executorNode, directCurrent)
-			
+
 			cursor.close()
 
 def push_api_coordinator_status_metric(dremioCluster, activeCoordinator, intendedRole, status):
@@ -338,7 +338,7 @@ def push_api_cluster_memory_allocated_metric(dremioCluster, clusterName, yarnMem
 	groupingKey = dict({"job": dremioCluster, "cluster": clusterName})
 	pushadd_to_gateway(pgwendpoint, job=dremioCluster, registry=registry, timeout=api_timeout, grouping_key=groupingKey)
 
-def push_api_cluster_memory_used_metric(dremioCluster, clusterName,  usedMemoryMB):	
+def push_api_cluster_memory_used_metric(dremioCluster, clusterName,  usedMemoryMB):
 	# Push Memory metrics
 	registry = CollectorRegistry()
 	metric = Gauge(api_cluster_memory_used_metric, "Used memory (GB) for a child cluster, pushed via Gateway",labelnames=['cluster'], registry=registry)
