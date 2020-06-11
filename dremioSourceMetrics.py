@@ -153,14 +153,12 @@ def main():
 
 					if response.status_code == 200:
 						name = container['path'][0]
-						type = response.json()['type']
 						report_data_source_status (name, response.status_code)
-						push_source_status_metric(dremioCluster, name, type, response.status_code)
+						push_source_status_metric(dremioCluster, name, response.status_code)
 					else:
 						name = container['path'][0]
-						type = 'N/A'
 						report_data_source_status (name, response.status_code)
-						push_source_status_metric(dremioCluster, name, type, response.status_code)
+						push_source_status_metric(dremioCluster, name, response.status_code)
 			
 			# SQL Metrics
 			# Connect to Dremio Node
@@ -176,12 +174,12 @@ def main():
 				vdsCount = row[0]
 				push_sql_metric(sql_vds_count_value, dremioCluster, vdsCount)
 			
-def push_source_status_metric(dremioCluster, sourceName, sourceType, status):
+def push_source_status_metric(dremioCluster, sourceName, status):
 	# Push Coordinator Status
 	registry = CollectorRegistry()
-	metric = Gauge(api_source_status_metric, "Source status, pushed via Gateway", labelnames=['source', 'type'], registry=registry)
-	metric.labels(sourceName, sourceType).set_to_current_time()
-	metric.labels(sourceName, sourceType).set(status)
+	metric = Gauge(api_source_status_metric, "Source status, pushed via Gateway", labelnames=['source'], registry=registry)
+	metric.labels(sourceName).set_to_current_time()
+	metric.labels(sourceName).set(status)
 	groupingKey = dict({"job": dremioCluster, "source": sourceName})
 	pushadd_to_gateway(pgwendpoint, job=dremioCluster, registry=registry, timeout=api_timeout, grouping_key=groupingKey)
 
