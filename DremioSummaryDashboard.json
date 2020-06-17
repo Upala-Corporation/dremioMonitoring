@@ -47,7 +47,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1591850450575,
+  "iteration": 1592367703771,
   "links": [],
   "panels": [
     {
@@ -455,39 +455,6 @@
           "unit": "short"
         },
         {
-          "$$hashKey": "object:891",
-          "alias": "",
-          "align": "auto",
-          "colorMode": "cell",
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": null,
-          "mappingType": 1,
-          "pattern": "Value #C",
-          "thresholds": [
-            "0",
-            "1"
-          ],
-          "type": "hidden",
-          "unit": "short",
-          "valueMaps": [
-            {
-              "$$hashKey": "object:1118",
-              "text": "UP",
-              "value": "1"
-            },
-            {
-              "$$hashKey": "object:1120",
-              "text": "DOWN",
-              "value": "-"
-            }
-          ]
-        },
-        {
           "$$hashKey": "object:902",
           "alias": "Running Executors",
           "align": "auto",
@@ -564,10 +531,10 @@
           "unit": "short"
         },
         {
-          "$$hashKey": "object:1571",
-          "alias": "Queue",
+          "$$hashKey": "object:355",
+          "alias": "Missing Executor Count",
           "align": "auto",
-          "colorMode": null,
+          "colorMode": "value",
           "colors": [
             "rgba(245, 54, 54, 0.9)",
             "rgba(237, 129, 40, 0.89)",
@@ -575,29 +542,28 @@
           ],
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "decimals": 2,
-          "mappingType": 1,
-          "pattern": "_2_queue",
-          "thresholds": [],
-          "type": "string",
-          "unit": "short"
-        },
-        {
-          "$$hashKey": "object:3032",
-          "alias": "Cooordinator",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
+          "mappingType": 2,
+          "pattern": "Value #C",
+          "rangeMaps": [],
+          "sanitize": false,
+          "thresholds": [
+            "0.1",
+            " 0"
           ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "_3_coordinator",
-          "thresholds": [],
           "type": "string",
-          "unit": "short"
+          "unit": "short",
+          "valueMaps": [
+            {
+              "$$hashKey": "object:380",
+              "text": "OK",
+              "value": "0"
+            },
+            {
+              "$$hashKey": "object:382",
+              "text": "",
+              "value": ""
+            }
+          ]
         },
         {
           "$$hashKey": "object:1538",
@@ -650,6 +616,14 @@
           "interval": "",
           "legendFormat": "",
           "refId": "E"
+        },
+        {
+          "expr": "sum(dremio_api_total_executors_Value{job=~\"$Cluster\"}) by (cluster, job) - sum(dremio_api_current_executors_Value{job=~\"$Cluster\"}) by (cluster, job)",
+          "format": "table",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "C"
         },
         {
           "expr": "label_replace(max(dremio_api_cluster_up{job=~\"$Cluster\"}) by (cluster, job), \"_2_queue\", \"$1\", \"yarnqueue\", \"(.*)\")",
@@ -726,5 +700,5 @@
   "variables": {
     "list": []
   },
-  "version": 3
+  "version": 5
 }

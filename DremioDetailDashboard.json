@@ -1,8 +1,8 @@
 {
   "__inputs": [
     {
-      "name": "DS_DREMIOPROMETHEUS",
-      "label": "dremioPrometheus",
+      "name": "DS_PROMETHEUS",
+      "label": "Prometheus",
       "description": "",
       "type": "datasource",
       "pluginId": "prometheus",
@@ -59,7 +59,7 @@
   "gnetId": null,
   "graphTooltip": 2,
   "id": null,
-  "iteration": 1591658519856,
+  "iteration": 1592368812210,
   "links": [],
   "panels": [
     {
@@ -72,7 +72,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#B877D9"
       ],
-      "datasource": "${DS_DREMIOPROMETHEUS}",
+      "datasource": "${DS_PROMETHEUS}",
       "decimals": null,
       "description": "",
       "format": "dateTimeAsUS",
@@ -167,7 +167,7 @@
         "#1F60C4",
         "#B877D9"
       ],
-      "datasource": "${DS_DREMIOPROMETHEUS}",
+      "datasource": "${DS_PROMETHEUS}",
       "decimals": 2,
       "description": "",
       "format": "s",
@@ -262,7 +262,7 @@
         "#37872D",
         "#37872D"
       ],
-      "datasource": "${DS_DREMIOPROMETHEUS}",
+      "datasource": "${DS_PROMETHEUS}",
       "decimals": null,
       "description": "",
       "format": "short",
@@ -355,7 +355,7 @@
         "#FA6400",
         "#C4162A"
       ],
-      "datasource": "${DS_DREMIOPROMETHEUS}",
+      "datasource": "${DS_PROMETHEUS}",
       "decimals": 0,
       "description": "",
       "format": "short",
@@ -446,7 +446,7 @@
         "#FA6400",
         "#C4162A"
       ],
-      "datasource": "${DS_DREMIOPROMETHEUS}",
+      "datasource": "${DS_PROMETHEUS}",
       "decimals": 0,
       "description": "",
       "format": "short",
@@ -533,11 +533,11 @@
       "colorPrefix": false,
       "colorValue": true,
       "colors": [
-        "#73BF69",
+        "#37872D",
         "rgba(237, 129, 40, 0.89)",
         "#B877D9"
       ],
-      "datasource": "${DS_DREMIOPROMETHEUS}",
+      "datasource": "${DS_PROMETHEUS}",
       "decimals": 0,
       "description": "",
       "format": "short",
@@ -625,11 +625,11 @@
       "colorPrefix": false,
       "colorValue": true,
       "colors": [
-        "#73BF69",
+        "#37872D",
         "rgba(237, 129, 40, 0.89)",
         "#B877D9"
       ],
-      "datasource": "${DS_DREMIOPROMETHEUS}",
+      "datasource": "${DS_PROMETHEUS}",
       "decimals": 0,
       "description": "",
       "format": "short",
@@ -721,7 +721,7 @@
         "#FA6400",
         "#C4162A"
       ],
-      "datasource": "${DS_DREMIOPROMETHEUS}",
+      "datasource": "${DS_PROMETHEUS}",
       "decimals": 0,
       "description": "",
       "format": "short",
@@ -812,7 +812,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#B877D9"
       ],
-      "datasource": "${DS_DREMIOPROMETHEUS}",
+      "datasource": "${DS_PROMETHEUS}",
       "decimals": 0,
       "description": "",
       "format": "short",
@@ -905,7 +905,7 @@
         "#FA6400",
         "#73BF69"
       ],
-      "datasource": "${DS_DREMIOPROMETHEUS}",
+      "datasource": "${DS_PROMETHEUS}",
       "decimals": 0,
       "description": "",
       "format": "short",
@@ -992,7 +992,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#B877D9"
       ],
-      "datasource": "${DS_DREMIOPROMETHEUS}",
+      "datasource": "${DS_PROMETHEUS}",
       "decimals": 0,
       "description": "",
       "format": "short",
@@ -1079,13 +1079,13 @@
       "cacheTimeout": null,
       "colorBackground": false,
       "colorPrefix": false,
-      "colorValue": true,
+      "colorValue": false,
       "colors": [
-        "#37872D",
+        "#FADE2A",
         "rgba(237, 129, 40, 0.89)",
         "#B877D9"
       ],
-      "datasource": "${DS_DREMIOPROMETHEUS}",
+      "datasource": "${DS_PROMETHEUS}",
       "decimals": null,
       "description": "",
       "format": "short",
@@ -1098,8 +1098,101 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 8,
+        "w": 6,
         "x": 0,
+        "y": 8
+      },
+      "id": 12,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "$$hashKey": "object:386",
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "$$hashKey": "object:387",
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "pluginVersion": "6.7.0",
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "120%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false,
+        "ymax": null,
+        "ymin": null
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "metrics_reflections_active_Value{job=~\"$Cluster\"} + metrics_reflections_unknown_Value{job=~\"$Cluster\"}",
+          "instant": true,
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Total Reflection Count",
+      "type": "singlestat",
+      "valueFontSize": "100%",
+      "valueMaps": [
+        {
+          "$$hashKey": "object:389",
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorPrefix": false,
+      "colorValue": true,
+      "colors": [
+        "#37872D",
+        "rgba(237, 129, 40, 0.89)",
+        "#B877D9"
+      ],
+      "datasource": "${DS_PROMETHEUS}",
+      "decimals": null,
+      "description": "",
+      "format": "short",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 6,
         "y": 8
       },
       "id": 6,
@@ -1174,11 +1267,11 @@
       "colorPrefix": false,
       "colorValue": true,
       "colors": [
-        "#FADE2A",
-        "rgba(237, 129, 40, 0.89)",
-        "#B877D9"
+        "#37872D",
+        "#FF9830",
+        "#F2495C"
       ],
-      "datasource": "${DS_DREMIOPROMETHEUS}",
+      "datasource": "${DS_PROMETHEUS}",
       "decimals": null,
       "description": "",
       "format": "short",
@@ -1191,11 +1284,11 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 8,
-        "x": 8,
+        "w": 6,
+        "x": 12,
         "y": 8
       },
-      "id": 12,
+      "id": 38,
       "interval": null,
       "links": [],
       "mappingType": 1,
@@ -1245,7 +1338,7 @@
           "refId": "A"
         }
       ],
-      "thresholds": "",
+      "thresholds": "10,20",
       "timeFrom": null,
       "timeShift": null,
       "title": "Reflections Refreshing - Current",
@@ -1271,7 +1364,7 @@
         "#FA6400",
         "#C4162A"
       ],
-      "datasource": "${DS_DREMIOPROMETHEUS}",
+      "datasource": "${DS_PROMETHEUS}",
       "decimals": null,
       "description": "",
       "format": "short",
@@ -1284,8 +1377,8 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 8,
-        "x": 16,
+        "w": 6,
+        "x": 18,
         "y": 8
       },
       "id": 7,
@@ -1356,7 +1449,7 @@
     {
       "cacheTimeout": null,
       "columns": [],
-      "datasource": "${DS_DREMIOPROMETHEUS}",
+      "datasource": "${DS_PROMETHEUS}",
       "description": "",
       "fontSize": "100%",
       "gridPos": {
@@ -1439,7 +1532,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_DREMIOPROMETHEUS}",
+      "datasource": "${DS_PROMETHEUS}",
       "description": "",
       "fill": 1,
       "fillGradient": 0,
@@ -1528,7 +1621,7 @@
     },
     {
       "columns": [],
-      "datasource": "${DS_DREMIOPROMETHEUS}",
+      "datasource": "${DS_PROMETHEUS}",
       "description": "",
       "fontSize": "100%",
       "gridPos": {
@@ -1663,7 +1756,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_DREMIOPROMETHEUS}",
+      "datasource": "${DS_PROMETHEUS}",
       "description": "",
       "fill": 1,
       "fillGradient": 0,
@@ -1757,7 +1850,7 @@
     },
     {
       "columns": [],
-      "datasource": "${DS_DREMIOPROMETHEUS}",
+      "datasource": "${DS_PROMETHEUS}",
       "description": "",
       "fontSize": "100%",
       "gridPos": {
@@ -1931,7 +2024,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_DREMIOPROMETHEUS}",
+      "datasource": "${DS_PROMETHEUS}",
       "description": "",
       "fill": 1,
       "fillGradient": 0,
@@ -2023,7 +2116,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_DREMIOPROMETHEUS}",
+      "datasource": "${DS_PROMETHEUS}",
       "description": "",
       "fill": 1,
       "fillGradient": 0,
@@ -2123,7 +2216,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_DREMIOPROMETHEUS}",
+      "datasource": "${DS_PROMETHEUS}",
       "description": "",
       "fill": 1,
       "fillGradient": 0,
@@ -2215,7 +2308,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_DREMIOPROMETHEUS}",
+      "datasource": "${DS_PROMETHEUS}",
       "description": "",
       "fill": 1,
       "fillGradient": 0,
@@ -2309,18 +2402,18 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_DREMIOPROMETHEUS}",
+      "datasource": "${DS_PROMETHEUS}",
       "description": "",
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 22,
+        "h": 11,
         "w": 12,
         "x": 0,
         "y": 60
       },
       "hiddenSeries": false,
-      "id": 33,
+      "id": 37,
       "legend": {
         "avg": false,
         "current": false,
@@ -2346,15 +2439,15 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(dremio_sql_executor_direct_current_Value{job=\"$Cluster\"}) by (cluster, instance)",
+          "expr": "sum(dremio_sql_executor_heap_current_Value{job=\"$Cluster\"}) by (job, executor)",
           "interval": "",
-          "legendFormat": "{{instance}}:{{cluster}} - Current",
+          "legendFormat": "{{executor}} - Current",
           "refId": "C"
         },
         {
-          "expr": "sum(dremio_sql_executor_direct_max_Value{job=\"$Cluster\"}) by (cluster, instance)",
+          "expr": "sum(dremio_sql_executor_heap_max_Value{job=\"$Cluster\"}) by (job, executor)",
           "interval": "",
-          "legendFormat": "{{instance}}:{{cluster}} - Max",
+          "legendFormat": "{{executor}} - Max",
           "refId": "D"
         }
       ],
@@ -2362,7 +2455,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Direct  memory Usage - Executors",
+      "title": "Heap  memory Usage - Executors",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -2407,7 +2500,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_DREMIOPROMETHEUS}",
+      "datasource": "${DS_PROMETHEUS}",
       "description": "",
       "fill": 1,
       "fillGradient": 0,
@@ -2507,7 +2600,105 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_DREMIOPROMETHEUS}",
+      "datasource": "${DS_PROMETHEUS}",
+      "description": "",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 11,
+        "w": 12,
+        "x": 0,
+        "y": 71
+      },
+      "hiddenSeries": false,
+      "id": 33,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "connected",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(dremio_sql_executor_direct_current_Value{job=\"$Cluster\"}) by (job, executor)",
+          "interval": "",
+          "legendFormat": "{{executor}} - Current",
+          "refId": "C"
+        },
+        {
+          "expr": "sum(dremio_sql_executor_direct_max_Value{job=\"$Cluster\"}) by (job, executor)",
+          "interval": "",
+          "legendFormat": "{{executor}} - Max",
+          "refId": "D"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Direct  memory Usage - Executors",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:493",
+          "decimals": null,
+          "format": "decbytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:494",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "${DS_PROMETHEUS}",
       "description": "",
       "fill": 1,
       "fillGradient": 0,
@@ -2612,7 +2803,7 @@
       {
         "allValue": null,
         "current": {},
-        "datasource": "${DS_DREMIOPROMETHEUS}",
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(metrics_reflections_active_Value, job)",
         "hide": 0,
         "includeAll": false,
@@ -2719,7 +2910,7 @@
       {
         "allValue": null,
         "current": {},
-        "datasource": "${DS_DREMIOPROMETHEUS}",
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(node_uname_info, job)",
         "hide": 2,
         "includeAll": false,
@@ -2742,7 +2933,7 @@
       {
         "allValue": null,
         "current": {},
-        "datasource": "${DS_DREMIOPROMETHEUS}",
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(node_uname_info{job=~\"$job\"},instance)",
         "hide": 2,
         "includeAll": false,
@@ -2765,7 +2956,7 @@
     ]
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-30m",
     "to": "now"
   },
   "timepicker": {
@@ -2788,5 +2979,5 @@
   "variables": {
     "list": []
   },
-  "version": 16
+  "version": 7
 }

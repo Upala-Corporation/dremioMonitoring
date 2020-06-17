@@ -88,12 +88,16 @@ def main():
 		try:
 			response = requests.get(masterUrl + server_status, timeout=api_timeout, verify=verifySsl)
 		except requests.ConnectionError:
+			if debug:
+				print('Master Connection Error: ', response.json())
 			if standbyEnabled:
 				activeCoordinator = standbyCoordinator
 				standbyUrl = protocol + standbyCoordinator + ":" + str(port)
 				try:
 					response = requests.get(standbyUrl + server_status, timeout=api_timeout, verify=verifySsl)
 				except requests.ConnectionError:
+					if debug:
+						print('Standby Connection Error: ', response.json())
 					status = 0
 			else:
 				status = 0

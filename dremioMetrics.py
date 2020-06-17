@@ -46,6 +46,8 @@ api_cluster_memory_used_metric = 'dremio_api_cluster_used_memory_Value'
 sql_executor_metric = 'dremio_sql_executors_Value'
 sql_direct_max_value = 'dremio_sql_executor_direct_max_Value'
 sql_direct_current_value = 'dremio_sql_executor_direct_current_Value'
+sql_heap_max_value = 'dremio_sql_executor_heap_max_Value'
+sql_heap_current_value = 'dremio_sql_executor_heap_current_Value'
 sql_threads_waiting_value = 'dremio_sql_threads_waiting_Value'
 
 # API endpoints
@@ -108,12 +110,17 @@ def main():
 			role = 'Master'
 			response = requests.get(masterUrl + server_status, timeout=api_timeout, verify=verifySsl)
 		except requests.ConnectionError:
+			if debug:
+				print('Master Connection Error: ', response.json())
+
 			if standbyEnabled:
 				activeCoordinator = standbyCoordinator
 				masterStatus = 1
 				try:
 					response = requests.get(masterJmxUrl, timeout=api_timeout, verify=False)
 				except requests.ConnectionError:
+					if debug:
+						print('Standby Connection Error: ', response.json())
 					masterStatus = 0
 			else:
 				masterStatus = 0
@@ -191,6 +198,8 @@ def main():
 								push_sql_metric(sql_threads_waiting_value, dremioCluster, executorNode, 0)
 								push_sql_metric(sql_direct_max_value, dremioCluster, executorNode, 0)
 								push_sql_metric(sql_direct_current_value, dremioCluster, executorNode, 0)
+								push_sql_metric(sql_heap_max_value, dremioCluster, executorNode, 0)
+								push_sql_metric(sql_heap_current_value, dremioCluster, executorNode, 0)
 
 		else:
 			# Check Child Clusters
@@ -290,6 +299,8 @@ def main():
 				heapCurrent = row[4]
 				push_sql_metric(sql_direct_max_value, dremioCluster, executorNode, directMax)
 				push_sql_metric(sql_direct_current_value, dremioCluster, executorNode, directCurrent)
+				push_sql_metric(sql_heap_max_value, dremioCluster, executorNode, heapMax)
+				push_sql_metric(sql_heap_current_value, dremioCluster, executorNode, heapCurrent)
 
 			cursor.close()
 
