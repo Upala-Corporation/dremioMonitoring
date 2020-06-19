@@ -380,7 +380,7 @@ def configParser(configFile, section):
 			configDict[option] = None
 	return configDict
 
-def get_error_message(self, response):
+def get_error_message(response):
 	message = ""
 	try:
 		if 'errorMessage' in response.json():
